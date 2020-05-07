@@ -21,7 +21,7 @@ describe("Testing database interactions", () => {
         const result = await getUser(this.user.username);
         expect(result.email).toBe('bobbysebolao@gmail.com');
       })
-    })
+    });
 
     describe("the getUsername function", () => {
       it('should return information for the specified user', async () => {
