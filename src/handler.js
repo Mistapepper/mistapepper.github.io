@@ -11,7 +11,7 @@ const cookie = require("cookie");
 const createPostFromTemplate = require("./createPostFromTemplate.js");
 const readingTimeCalculator = require("./helpers/readingTimeCalculator.js");
 
-const { getAllMainImages, getAllPosts, getAllThumbnails, getComments, getPost, getTags, getUser, getUsername, deleteEmailVerificationToken, getEmailVerificationToken, submitEmailVerificationToken, submitNewComment, submitNewImage, submitNewPost, submitNewThumbnail, submitNewUser, updateVerifiedUser } = require("../queries/index");
+const { getAllMainImages, getAllPosts, getAllThumbnails, getComments, getPost, getTags, getUser, getUsername, deleteEmailVerificationToken, getEmailVerificationToken, submitEmailVerificationToken, submitNewComment, submitNewImage, submitNewPost, submitNewThumbnail, submitNewUser, updateVerifiedUser } = require("./queries/index");
 
 const validateNewUser = require("./authentication/validateNewUser.js");
 const { hashPassword, comparePassword } = require("./authentication/hash.js");
@@ -27,15 +27,16 @@ const customLog = require("./utils/customLog");
 
 //GET REQUEST HANDLERS
 
-const homeHandler = res => {
-  fs.readFile(__dirname + "/../index.html", function(error, file) {
-    if (error) {
-      console.log("error");
-      return;
-    }
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.end(file);
-  });
+const homeHandler = (req, res) => {
+  // fs.readFile(__dirname + "/../index.html", function(error, file) {
+  //   if (error) {
+  //     console.log("error");
+  //     return;
+  //   }
+  //   res.writeHead(200, { "Content-Type": "text/html" });
+  //   res.end(file);
+  // });
+  res.render("home.html", { data: "some example data..."});
 };
 
 const allPostsHandler = (req, res) => {

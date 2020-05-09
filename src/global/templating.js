@@ -6,7 +6,8 @@ const Handlebars = require("handlebars");
 const hb = expressHandlebars.create({
 	extname: ".html",
 	defaultLayout: "main",
-	partialsDir: path.join("views", "partials")
+	layoutsDir: path.join("src/views", "layouts"),
+	partialsDir: path.join("src/views", "partials")
 });
 
 function render(template_path, params) {

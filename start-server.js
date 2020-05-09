@@ -2,26 +2,25 @@
 const express = require("express");
 const path = require("path");
 
-
-// const routes = require("./app");
+// Local dependency files
+const router = require("./src/router");
 
 /* Local modules */
 const templating = require("./src/global/templating");
 
 module.exports = () => {
 
-    /* Global objects */
+/* Global objects */
 const app = express();
 
 /* Constants */
-const SITE_DIR = path.join(__dirname, "site");
+// const SITE_DIR = path.join(__dirname, "site");
 
 /* App settings */
 app.engine("html", templating.engine);
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "src/views"));
 // You can turn 'strict routing' on to distinguish between URLs with trailing slashes
 // app.set("strict routing", true);
-
 
 // Remove the X-Powered-By: Express header from responses
 app.disable("x-powered-by");
@@ -50,17 +49,17 @@ app.use(function(req, res, next) {
 });
 
 /* Serve static files */
-app.use(express.static(SITE_DIR));
+// app.use(express.static(SITE_DIR));
 
 /* Main app */
-// app.routes(routes);
+router.routes(app);
 
 const port = process.env.PORT || 9000;
 
 function startServer() {
     return new Promise((resolve) => {
         const httpServer = app.listen(port, () => {
-            console.info(`App is listening on port ${port}`);
+            console.info(`Server is listening on port ${port}`);
         })
         resolve(httpServer);
     })
