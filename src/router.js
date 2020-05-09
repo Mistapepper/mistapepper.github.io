@@ -80,8 +80,37 @@ const handler = require("./handler");
 // module.exports = router;
 
 exports.routes = (app) => {
-  // app.get("/", (req, res) => {
-  //   res.render("home.html", { data: "some example data..."});
-  // })
+  /* Manual redirects */
+  app.get("/blog/posts/jamstack-conf-2019-recap.html", (req, res) => {
+    res.redirect("/posts/jamstack-conf-2019-recap.html");
+  });
+
+  /* Home route handlers */
   app.get("/", handler.homeHandler);
+  app.get("/projects", handler.getProjectsHandler);
+  app.post("/contact/send", handler.contactFormHandler);
+
+  /* Blog route handlers */
+  app.get("/blog/all-posts", handler.allPostsHandler);
+  app.get("/blog/posts", handler.postsJSONHandler);
+  app.get("/blog/recent-posts", handler.recentPostsHandler);
+  app.get("/blog/main-images", handler.mainImagesHandler);
+  app.get("/blog/comments", handler.getCommentsHandler);
+  app.get("/blog/author", handler.getAuthorHandler);
+  app.get("/blog/tags", handler.getTagsHandler);
+  app.get("/blog/login", handler.loginPageHandler);
+  app.get("/blog/logout", handler.logoutHandler);
+  app.get("/create/account", handler.createAccountPageHandler);
+  app.get("/blog/new", handler.newPostHandler);
+  app.get("/blog/image-manager", handler.imageManagerPageHandler);
+  app.get("/blog/check-login-status", handler.checkLoginStatusHandler);
+  app.get("/blog/confirm-email", handler.confirmEmailHandler);
+  app.get("/sign-s3", handler.awsSignatureHandler);
+  app.get("/posts/", handler.specificPostHandler);
+  app.get("/posts/", handler.specificPostHandler);
+  app.post("/create/post", handler.createPostHandler);
+  app.post("/create/image", handler.uploadImageHandler);
+  app.post("/create/account", handler.createAccountSubmitHandler);
+  app.post("/create/login", handler.loginSubmitHandler);
+  app.post("/create/comment", handler.commentSubmitHandler);
  }

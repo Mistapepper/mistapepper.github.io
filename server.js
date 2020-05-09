@@ -7,6 +7,8 @@
 //   console.info(`Server is listening on port ${port}`);
 // });
 
+global.__basedir = __dirname;
+
 const startServer = require("./start-server");
 
 startServer();

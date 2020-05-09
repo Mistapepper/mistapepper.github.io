@@ -13,9 +13,6 @@ module.exports = () => {
 /* Global objects */
 const app = express();
 
-/* Constants */
-// const SITE_DIR = path.join(__dirname, "site");
-
 /* App settings */
 app.engine("html", templating.engine);
 app.set("views", path.join(__dirname, "src/views"));
@@ -25,9 +22,23 @@ app.set("views", path.join(__dirname, "src/views"));
 // Remove the X-Powered-By: Express header from responses
 app.disable("x-powered-by");
 
+// Set general response headers for all HTTP requests
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, PATCH, DELETE, OPTIONS"
+    );
+    next();
+  });
+
 // Check the Origin header if present, to protect against
 // cross-site request forgery attacks.
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
     const host = req.headers.host;
     const origin = req.headers.origin;
 
@@ -49,7 +60,7 @@ app.use(function(req, res, next) {
 });
 
 /* Serve static files */
-// app.use(express.static(SITE_DIR));
+app.use(express.static(path.join(__dirname, "public")));
 
 /* Main app */
 router.routes(app);
