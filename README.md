@@ -20,6 +20,9 @@ My portfolio website.
 
 ## Dependencies
 
+- express
+- handlebars
+- express-handlebars
 - airtable
 - aws-sdk
 - bcryptjs
@@ -29,6 +32,7 @@ My portfolio website.
 - jsonwebtoken
 - nodemailer
 - pg
+- pg-promise
 - query-string
 - request
 - xmlhttprequest
